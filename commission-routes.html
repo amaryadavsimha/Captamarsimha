@@ -1,0 +1,893 @@
+<title>Routes to a Commission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --paper:#F1F2ED;
+  --surface:#FBFBF8;
+  --ink:#171A16;
+  --ink-2:#3E443C;
+  --muted:#6B7268;
+  --rule:#CFD4C6;
+  --rule-soft:#E2E5DB;
+  --green:#3D5A41;
+  --green-ink:#2F4633;
+  --green-soft:#E2EADD;
+  --brass:#8E6524;
+  --brass-soft:#F0E7D3;
+
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Spectral",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131510;
+    --surface:#1B1E17;
+    --ink:#E9EBE1;
+    --ink-2:#C3C8B9;
+    --muted:#8C9384;
+    --rule:#333829;
+    --rule-soft:#252A1F;
+    --green:#A3C398;
+    --green-ink:#BCD6B2;
+    --green-soft:#212D1E;
+    --brass:#D5AA68;
+    --brass-soft:#2C2415;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131510;
+  --surface:#1B1E17;
+  --ink:#E9EBE1;
+  --ink-2:#C3C8B9;
+  --muted:#8C9384;
+  --rule:#333829;
+  --rule-soft:#252A1F;
+  --green:#A3C398;
+  --green-ink:#BCD6B2;
+  --green-soft:#212D1E;
+  --brass:#D5AA68;
+  --brass-soft:#2C2415;
+}
+
+*{box-sizing:border-box}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+
+.sheet{
+  max-width:1000px;
+  margin:0 auto;
+  padding-inline:20px;
+  padding-block:0 72px;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead{
+  border-bottom:2px solid var(--ink);
+  padding-block:44px 18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px 40px;
+  align-items:flex-end;
+  justify-content:space-between;
+}
+.masthead h1{
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:clamp(2.4rem,7vw,4.1rem);
+  line-height:.94;
+  letter-spacing:-.025em;
+  margin:0;
+  text-wrap:balance;
+}
+.eyebrow{
+  font-family:var(--f-mono);
+  font-size:.7rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0 0 14px;
+}
+.stamp{
+  font-family:var(--f-mono);
+  font-size:.72rem;
+  line-height:1.7;
+  color:var(--muted);
+  text-align:right;
+  border-left:2px solid var(--brass);
+  padding-left:14px;
+  max-width:260px;
+}
+.stamp b{color:var(--ink-2);font-weight:500}
+
+.standfirst{
+  margin:30px 0 0;
+  max-width:62ch;
+  font-size:1.12rem;
+  color:var(--ink-2);
+}
+.standfirst em{color:var(--ink);font-style:italic}
+
+/* ---------- gate index ---------- */
+
+.index{
+  margin-top:38px;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+.index a{
+  display:block;
+  padding:18px 18px 20px;
+  text-decoration:none;
+  color:inherit;
+  border-left:1px solid var(--rule-soft);
+  transition:background .16s ease;
+}
+.index a:first-child{border-left:0}
+.index a:hover,.index a:focus-visible{background:var(--green-soft)}
+.index .n{
+  font-family:var(--f-mono);
+  font-size:.68rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--brass);
+  display:block;
+  margin-bottom:6px;
+}
+.index .t{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:.98rem;
+  line-height:1.25;
+  letter-spacing:-.01em;
+  display:block;
+}
+
+/* ---------- sections ---------- */
+
+.gate{margin-top:64px;scroll-margin-top:20px}
+.gate-head{
+  border-bottom:1px solid var(--ink);
+  padding-bottom:10px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:8px 16px;
+  justify-content:space-between;
+}
+.gate-head h2{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:clamp(1.35rem,3.4vw,1.85rem);
+  letter-spacing:-.02em;
+  margin:0;
+}
+.gate-head .count{
+  font-family:var(--f-mono);
+  font-size:.72rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.gate-note{
+  margin:14px 0 0;
+  color:var(--muted);
+  font-size:.98rem;
+  max-width:62ch;
+}
+
+/* ---------- route records ---------- */
+
+.route{
+  border-top:1px solid var(--rule-soft);
+  padding-block:26px 28px;
+}
+.gate .route:first-of-type{border-top:0;padding-top:22px}
+
+.route-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:6px 14px;
+  margin-bottom:4px;
+}
+.route h3{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:1.24rem;
+  letter-spacing:-.015em;
+  margin:0;
+}
+.route h3 span{color:var(--muted);font-weight:500}
+
+.chip{
+  font-family:var(--f-mono);
+  font-size:.66rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:3px 9px 4px;
+  border-radius:2px;
+  white-space:nowrap;
+}
+.chip.pc{background:var(--green);color:var(--paper)}
+.chip.ssc{border:1px solid var(--brass);color:var(--brass)}
+.chip.other{border:1px solid var(--rule);color:var(--muted)}
+
+.lede{
+  margin:6px 0 18px;
+  max-width:64ch;
+  color:var(--ink-2);
+}
+
+dl.spec{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:14px 28px;
+  margin:0;
+  border-left:2px solid var(--green-soft);
+  padding-left:18px;
+}
+dl.spec dt{
+  font-family:var(--f-mono);
+  font-size:.66rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:2px;
+}
+dl.spec dd{
+  margin:0;
+  font-size:.96rem;
+  line-height:1.5;
+}
+dl.spec dd .num{font-family:var(--f-mono);font-size:.9rem;font-variant-numeric:tabular-nums}
+
+.aside{
+  margin-top:16px;
+  padding:12px 16px;
+  background:var(--surface);
+  border:1px solid var(--rule-soft);
+  font-size:.92rem;
+  color:var(--ink-2);
+  max-width:66ch;
+}
+.aside b{
+  font-family:var(--f-mono);
+  font-size:.66rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--brass);
+  display:block;
+  margin-bottom:3px;
+  font-weight:500;
+}
+
+/* ---------- comparison table ---------- */
+
+.table-wrap{
+  overflow-x:auto;
+  border-top:1px solid var(--ink);
+  border-bottom:1px solid var(--rule);
+  margin-top:18px;
+}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:720px;
+  font-size:.9rem;
+}
+th,td{
+  text-align:left;
+  padding:9px 14px 9px 0;
+  border-bottom:1px solid var(--rule-soft);
+  vertical-align:top;
+}
+th{
+  font-family:var(--f-mono);
+  font-weight:500;
+  font-size:.66rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  padding-top:12px;
+  padding-bottom:11px;
+}
+td.rt{font-family:var(--f-display);font-weight:500;white-space:nowrap}
+td.age{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:hover{background:var(--green-soft)}
+.yes{color:var(--brass);font-family:var(--f-mono);font-size:.82rem}
+.no{color:var(--muted);font-family:var(--f-mono);font-size:.82rem}
+
+/* ---------- common panel ---------- */
+
+.common{
+  margin-top:64px;
+  background:var(--surface);
+  border:1px solid var(--rule);
+  padding:30px 30px 34px;
+}
+.common h2{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:1.4rem;
+  letter-spacing:-.02em;
+  margin:0 0 4px;
+}
+.common > p{color:var(--muted);margin:0 0 22px;font-size:.98rem}
+.common-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:22px 34px;
+}
+.common-grid h3{
+  font-family:var(--f-mono);
+  font-size:.68rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--brass);
+  margin:0 0 5px;
+  font-weight:500;
+}
+.common-grid p{margin:0;font-size:.94rem;color:var(--ink-2);line-height:1.55}
+
+/* ---------- footnotes ---------- */
+
+.notes{margin-top:60px;border-top:2px solid var(--ink);padding-top:24px}
+.notes h2{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:1.2rem;
+  letter-spacing:-.015em;
+  margin:0 0 16px;
+}
+.note{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:6px 26px;
+  padding-block:13px;
+  border-top:1px solid var(--rule-soft);
+  font-size:.95rem;
+}
+.note:first-of-type{border-top:0}
+.note dt{
+  font-family:var(--f-mono);
+  font-size:.68rem;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--muted);
+  padding-top:3px;
+}
+.note dd{margin:0;color:var(--ink-2);max-width:62ch}
+
+.colophon{
+  margin-top:46px;
+  padding-top:20px;
+  border-top:1px solid var(--rule);
+  font-family:var(--f-mono);
+  font-size:.72rem;
+  line-height:1.85;
+  color:var(--muted);
+}
+.colophon a{color:var(--brass)}
+.colophon strong{
+  display:block;
+  color:var(--ink-2);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:500;
+  margin-bottom:6px;
+}
+
+a:focus-visible,.index a:focus-visible{
+  outline:2px solid var(--brass);
+  outline-offset:2px;
+}
+
+@media (max-width:760px){
+  body{font-size:16px}
+  .index{grid-template-columns:repeat(2,1fr)}
+  .index a:nth-child(3){border-left:0}
+  .index a:nth-child(n+3){border-top:1px solid var(--rule-soft)}
+  .stamp{text-align:left;max-width:none}
+  .masthead{padding-block:34px 16px}
+  .common{padding:24px 20px 26px}
+  .note{grid-template-columns:1fr;gap:2px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Indian Army &middot; Officer entry &middot; Reference</p>
+      <h1>Routes to a Commission</h1>
+    </div>
+    <div class="stamp">
+      <b>Compiled 14 Sep 2026</b><br>
+      Course numbers and vacancies move every cycle. Read the live notification before you act on anything here.
+    </div>
+  </header>
+
+  <p class="standfirst">
+    There is no single door into the officer cadre. There are sixteen, and which ones are open to you
+    is decided almost entirely by <em>one thing</em>: the highest qualification you already hold, and
+    whether you are already in uniform. That is how this page is arranged &mdash; not alphabetically, and
+    not by glamour, but by the gate each route opens from.
+  </p>
+
+  <nav class="index" aria-label="Entry gates">
+    <a href="#school"><span class="n">Gate 01</span><span class="t">Straight from Class&nbsp;12</span></a>
+    <a href="#graduate"><span class="n">Gate 02</span><span class="t">Any degree</span></a>
+    <a href="#professional"><span class="n">Gate 03</span><span class="t">Professional degree</span></a>
+    <a href="#ranks"><span class="n">Gate 04</span><span class="t">From the ranks</span></a>
+  </nav>
+
+  <!-- ============ GATE 1 ============ -->
+  <section class="gate" id="school">
+    <div class="gate-head">
+      <h2>Straight from Class&nbsp;12</h2>
+      <span class="count">4 routes &middot; ages 16&frac12;&ndash;25</span>
+    </div>
+    <p class="gate-note">
+      The school-leaver routes are the cheapest commissions in the service &mdash; the Army pays for the degree &mdash;
+      and the most competitive. All four are age-gated hard; miss the window and it never reopens.
+    </p>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>National Defence Academy <span>&middot; NDA &amp; NA</span></h3>
+        <span class="chip pc">Permanent Commission</span>
+      </div>
+      <p class="lede">The classic route. A UPSC examination twice a year, three years at Khadakwasla alongside
+        cadets bound for the Navy and Air Force, then a year at the IMA.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">16.5 &ndash; 19.5</span> years</dd>
+        <dt>Who</dt><dd>Unmarried men and women</dd>
+        <dt>Qualification</dt><dd>Class 12 pass &mdash; any stream for the Army wing; Physics, Chemistry and Maths for the Navy and Air Force wings</dd>
+        <dt>Selection</dt><dd>UPSC written (Mathematics + General Ability) &rarr; 5-day SSB &rarr; medical &rarr; all-India merit</dd>
+        <dt>Training</dt><dd>3 years NDA Khadakwasla + 1 year IMA Dehradun</dd>
+        <dt>Cycle</dt><dd>Twice a year &mdash; NDA I and NDA II</dd>
+      </dl>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Technical Entry Scheme <span>&middot; 10+2 TES</span></h3>
+        <span class="chip pc">Permanent Commission</span>
+      </div>
+      <p class="lede">No Army written paper at all. Your JEE Main score does the sifting, and the Army then
+        puts you through an engineering degree at its own colleges before you command anything.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">16.5 &ndash; 19.5</span> years</dd>
+        <dt>Who</dt><dd>Unmarried men</dd>
+        <dt>Qualification</dt><dd>Class 12 with Physics, Chemistry and Maths, minimum <span class="num">60%</span> aggregate across the three, plus a valid JEE Main score</dd>
+        <dt>Selection</dt><dd>Shortlisting on JEE Main &rarr; SSB &rarr; medical</dd>
+        <dt>Training</dt><dd>5 years &mdash; 1 year basic military training, 3 years engineering at CME Pune, MCTE Mhow or MCEME Secunderabad, 1 year post-commission</dd>
+        <dt>Scale</dt><dd>TES-56 carried roughly <span class="num">90</span> vacancies</dd>
+      </dl>
+      <div class="aside">
+        <b>Worth knowing</b>
+        You are commissioned before the degree is finished, and you draw a Lieutenant's pay through the
+        final year of study. The trade is a longer bond and a technical arm posting.
+      </div>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Military Nursing Service <span>&middot; B.Sc Nursing</span></h3>
+        <span class="chip other">Commission in the MNS</span>
+      </div>
+      <p class="lede">A four-year nursing degree at an Armed Forces college, ending in a commission as a
+        Lieutenant. Run entirely by the Armed Forces Medical Services, on its own calendar and its own portal.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">17 &ndash; 25</span> years</dd>
+        <dt>Who</dt><dd>Women only &mdash; unmarried, or divorced, legally separated or widowed without dependants</dd>
+        <dt>Qualification</dt><dd>Class 12 with Physics, Chemistry, Biology and English, minimum <span class="num">50%</span> aggregate; NEET-UG score required</dd>
+        <dt>Selection</dt><dd>NEET-UG &rarr; MNS test of general intelligence and English &rarr; psychological assessment &rarr; interview &rarr; medical</dd>
+        <dt>Apply at</dt><dd>join.afms.gov.in &mdash; not the Army recruiting portal</dd>
+      </dl>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Armed Forces Medical College <span>&middot; AFMC Pune</span></h3>
+        <span class="chip other">Bonded commission in the AFMS</span>
+      </div>
+      <p class="lede">An MBBS at Pune, followed by a bonded commission in the medical services. Selection runs
+        off NEET-UG plus AFMC's own screening, and the year's rules are set by the college rather than by
+        Army recruiting.</p>
+      <dl class="spec">
+        <dt>Qualification</dt><dd>Class 12 with Physics, Chemistry, Biology and English; NEET-UG</dd>
+        <dt>Who</dt><dd>Men and women, per the year's prospectus</dd>
+        <dt>Obligation</dt><dd>Compulsory service bond on graduation</dd>
+        <dt>Apply at</dt><dd>join.afms.gov.in &mdash; check the current prospectus for age, marital status and the bond terms</dd>
+      </dl>
+    </article>
+  </section>
+
+  <!-- ============ GATE 2 ============ -->
+  <section class="gate" id="graduate">
+    <div class="gate-head">
+      <h2>Any degree, any discipline</h2>
+      <span class="count">4 routes &middot; ages 18&ndash;42</span>
+    </div>
+    <p class="gate-note">
+      What your degree is in stops mattering here; what matters is whether you sit a written paper.
+      Two of these four routes skip it entirely.
+    </p>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>CDS &rarr; Indian Military Academy</h3>
+        <span class="chip pc">Permanent Commission</span>
+      </div>
+      <p class="lede">The graduate equivalent of the NDA, and the only graduate route to a permanent
+        commission in the combat arms on day one.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">19 &ndash; 24</span> years</dd>
+        <dt>Who</dt><dd>Unmarried men</dd>
+        <dt>Qualification</dt><dd>A degree from a recognised university, any discipline</dd>
+        <dt>Selection</dt><dd>UPSC CDS written (English, General Knowledge, Elementary Mathematics) &rarr; SSB &rarr; medical &rarr; merit</dd>
+        <dt>Training</dt><dd>IMA Dehradun, 18 months</dd>
+        <dt>Cycle</dt><dd>Twice a year &mdash; CDS I and CDS II</dd>
+      </dl>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>CDS &rarr; Officers Training Academy <span>&middot; SSC Non-Technical</span></h3>
+        <span class="chip ssc">Short Service Commission</span>
+      </div>
+      <p class="lede">The widest graduate door in the Army, and the one open to both men and women.
+        The Elementary Mathematics paper is dropped for the OTA course.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">19 &ndash; 25</span> years</dd>
+        <dt>Who</dt><dd>Unmarried men and women; separate notified categories exist for widows of defence personnel</dd>
+        <dt>Qualification</dt><dd>A degree from a recognised university, any discipline</dd>
+        <dt>Selection</dt><dd>UPSC CDS written (English, General Knowledge) &rarr; SSB &rarr; medical &rarr; merit</dd>
+        <dt>Tenure</dt><dd>10 years, extendable to 14; Permanent Commission may be applied for</dd>
+        <dt>Training</dt><dd>OTA Chennai, 49 weeks</dd>
+      </dl>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>NCC Special Entry</h3>
+        <span class="chip ssc">Short Service Commission</span>
+      </div>
+      <p class="lede">No written examination whatsoever. Three years in the NCC Senior Division buys you a
+        direct call to the Service Selection Board &mdash; which is why the vacancy count is small and the
+        competition is fierce.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">19 &ndash; 25</span> years</dd>
+        <dt>Who</dt><dd>Unmarried men and women, notified separately</dd>
+        <dt>Qualification</dt><dd>A degree with minimum <span class="num">50%</span> aggregate, plus an NCC 'C' certificate graded <span class="num">B</span> or above and two to three years in the Senior Division or Senior Wing</dd>
+        <dt>Selection</dt><dd>Direct SSB on NCC credentials &rarr; medical &rarr; merit</dd>
+        <dt>Tenure</dt><dd>10 years, extendable to 14; Permanent Commission may be applied for after 10</dd>
+        <dt>Training</dt><dd>OTA Chennai, 49 weeks</dd>
+      </dl>
+      <div class="aside">
+        <b>Ring-fenced vacancies</b>
+        A recent men's course carried 70 vacancies, of which 7 were reserved for wards of battle casualties.
+        Those candidates are exempted from the NCC 'C' certificate requirement and certify instead through
+        the Manpower (Policy &amp; Planning) Directorate.
+      </div>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Territorial Army</h3>
+        <span class="chip other">Part-time commission</span>
+      </div>
+      <p class="lede">The only route on this page that does not ask you to leave your job. It also carries
+        the widest age band in the officer cadre by a margin of fifteen years.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">18 &ndash; 42</span> years</dd>
+        <dt>Who</dt><dd>Men and women in gainful civil employment or self-employment. Serving regular and paramilitary personnel are not eligible</dd>
+        <dt>Qualification</dt><dd>A degree from a recognised university</dd>
+        <dt>Selection</dt><dd>Computer-based test &mdash; <span class="num">100</span> questions in 2 hours (Reasoning 40, General Knowledge 30, English 30), with one-third negative marking &rarr; interview board &rarr; SSB &rarr; medical</dd>
+        <dt>Commitment</dt><dd>About two months' training a year, with liability for embodiment on operational requirement</dd>
+      </dl>
+    </article>
+  </section>
+
+  <!-- ============ GATE 3 ============ -->
+  <section class="gate" id="professional">
+    <div class="gate-head">
+      <h2>A professional degree</h2>
+      <span class="count">5 routes &middot; ages 20&ndash;45</span>
+    </div>
+    <p class="gate-note">
+      Engineering, law, medicine and dentistry each have a dedicated channel. None of them involves a
+      written examination &mdash; your degree marks, your CLAT PG score or your NEET score do the shortlisting.
+    </p>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Technical Graduate Course <span>&middot; TGC</span></h3>
+        <span class="chip pc">Permanent Commission</span>
+      </div>
+      <p class="lede">The engineer's permanent commission. Shortlisting runs off your engineering aggregate
+        alone, which makes the cut-off percentage the whole contest.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">20 &ndash; 27</span> years</dd>
+        <dt>Who</dt><dd>Unmarried men</dd>
+        <dt>Qualification</dt><dd>BE or B.Tech in a notified stream</dd>
+        <dt>Selection</dt><dd>Shortlisting on engineering aggregate &rarr; SSB &rarr; medical &rarr; merit</dd>
+        <dt>Training</dt><dd>IMA Dehradun, 1 year</dd>
+      </dl>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Short Service Commission (Technical) <span>&middot; SSC Tech</span></h3>
+        <span class="chip ssc">Short Service Commission</span>
+      </div>
+      <p class="lede">The largest technical intake, notified separately for men and women, and the one that
+        publishes vacancies stream by stream &mdash; so you can read your own odds before applying.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">20 &ndash; 27</span> years</dd>
+        <dt>Who</dt><dd>Unmarried men and women, notified separately</dd>
+        <dt>Qualification</dt><dd>BE or B.Tech in a notified stream; final-year students may apply against a completion deadline</dd>
+        <dt>Selection</dt><dd>Direct SSB on engineering marks &rarr; medical &rarr; merit</dd>
+        <dt>Tenure</dt><dd>10 years, extendable to 14; Permanent Commission may be applied for</dd>
+        <dt>Training</dt><dd>OTA Gaya or OTA Chennai, 49 weeks</dd>
+      </dl>
+      <div class="aside">
+        <b>A recent cycle, by stream</b>
+        350 vacancies: Mechanical 101, Civil 75, Electronics &amp; Communication 64, Computer Science &amp; IT 60,
+        Electrical 33, Ballistics &amp; Laser Technology 17.
+      </div>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Judge Advocate General <span>&middot; JAG</span></h3>
+        <span class="chip ssc">Short Service Commission</span>
+      </div>
+      <p class="lede">The narrowest gate in the service. Vacancies run in single digits per course, and a
+        CLAT PG score is now mandatory &mdash; which quietly turned an application into a national examination.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">21 &ndash; 27</span> years</dd>
+        <dt>Who</dt><dd>Unmarried men and women, notified separately</dd>
+        <dt>Qualification</dt><dd>LLB with minimum <span class="num">55%</span> aggregate from a Bar Council&ndash;recognised institution, eligible for enrolment as an advocate, plus a valid CLAT PG score</dd>
+        <dt>Selection</dt><dd>Shortlisting on CLAT PG &rarr; SSB &rarr; medical &rarr; merit</dd>
+        <dt>Tenure</dt><dd>10 years, extendable to 14; Permanent Commission may be applied for after 10</dd>
+        <dt>Training</dt><dd>OTA Chennai, 49 weeks</dd>
+      </dl>
+      <div class="aside">
+        <b>Scale</b>
+        The 123rd course carried <strong>5</strong> vacancies for men. Treat JAG as a route you attempt
+        alongside another, not instead of one.
+      </div>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Army Medical Corps <span>&middot; AMC</span></h3>
+        <span class="chip ssc">Short Service Commission</span>
+      </div>
+      <p class="lede">The only officer entries that skip the Service Selection Board entirely. An AFMS board
+        interviews you instead, and the process is measured in weeks rather than months.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd>Up to <span class="num">30</span> years, with relaxation per government norms</dd>
+        <dt>Who</dt><dd>Men and women</dd>
+        <dt>Qualification</dt><dd>MBBS recognised by the National Medical Commission, internship complete</dd>
+        <dt>Selection</dt><dd>Shortlisting &rarr; interview before an AFMS board &rarr; medical</dd>
+        <dt>Scale</dt><dd>A recent cycle carried about <span class="num">100</span> vacancies, roughly 75 men and 25 women</dd>
+        <dt>Apply at</dt><dd>join.afms.gov.in</dd>
+      </dl>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Army Dental Corps <span>&middot; AD Corps</span></h3>
+        <span class="chip ssc">Short Service Commission</span>
+      </div>
+      <p class="lede">The most forgiving age limit of any direct entry &mdash; a practising dentist in their
+        forties is still eligible, which is true of nothing else on this page.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd>Up to <span class="num">45</span> years, no relaxation</dd>
+        <dt>Who</dt><dd>Men and women</dd>
+        <dt>Qualification</dt><dd>BDS with minimum <span class="num">55%</span> in the final examination, or MDS, from a Dental Council&ndash;recognised institution, with permanent registration; a valid NEET-MDS score is the shortlisting instrument</dd>
+        <dt>Selection</dt><dd>Shortlisting on NEET-MDS &rarr; interview at an Army base hospital &rarr; medical</dd>
+        <dt>Apply at</dt><dd>join.afms.gov.in</dd>
+      </dl>
+    </article>
+  </section>
+
+  <!-- ============ GATE 4 ============ -->
+  <section class="gate" id="ranks">
+    <div class="gate-head">
+      <h2>From the ranks</h2>
+      <span class="count">3 routes &middot; serving soldiers only</span>
+    </div>
+    <p class="gate-note">
+      Three departmental routes, separated by how much service you already have behind you. These are the
+      only entries that admit married candidates as a matter of course, and the only ones where your
+      record of service is itself part of the application.
+    </p>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Army Cadet College <span>&middot; ACC</span></h3>
+        <span class="chip pc">Permanent Commission</span>
+      </div>
+      <p class="lede">The full commission, with no ceiling on where it ends. Four years of training &mdash;
+        longer than any other route bar TES &mdash; and the graduate emerges indistinguishable from a
+        direct-entry officer.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd><span class="num">20 &ndash; 27</span> years</dd>
+        <dt>Service</dt><dd>Minimum <span class="num">2</span> years</dd>
+        <dt>Qualification</dt><dd>Class 12 or equivalent, plus the ACC written examination</dd>
+        <dt>Selection</dt><dd>ACC written &rarr; SSB &rarr; medical &rarr; merit</dd>
+        <dt>Training</dt><dd>3 years at the ACC Wing, Dehradun + 1 year IMA</dd>
+        <dt>Marital status</dt><dd>Married candidates eligible</dd>
+      </dl>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Special Commissioned Officer <span>&middot; SCO</span></h3>
+        <span class="chip other">Commission with a rank ceiling</span>
+      </div>
+      <p class="lede">For the soldier who has already built a career and wants the commission that follows
+        from it. The rank ceiling is lower than a direct entry's &mdash; that is the trade, and it is
+        explicit in the terms.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd>Roughly <span class="num">30 &ndash; 35</span> years; the opening age varies by cycle</dd>
+        <dt>Service</dt><dd>Minimum <span class="num">5</span> years</dd>
+        <dt>Qualification</dt><dd>Matriculation with a one-year diploma, or higher</dd>
+        <dt>Selection</dt><dd>Written examination &rarr; SSB &rarr; medical</dd>
+        <dt>Training</dt><dd>Pre-commission capsule, then 1 year at IMA Dehradun</dd>
+        <dt>Marital status</dt><dd>Married candidates eligible</dd>
+      </dl>
+    </article>
+
+    <article class="route">
+      <div class="route-head">
+        <h3>Permanent Commission (Special List) <span>&middot; PC(SL)</span></h3>
+        <span class="chip pc">Permanent Commission</span>
+      </div>
+      <p class="lede">The long-service route. Twelve weeks of training against four years at the ACC, because
+        the Army is commissioning experience it has already spent a decade building.</p>
+      <dl class="spec">
+        <dt>Age</dt><dd>Up to <span class="num">42</span> years &mdash; <span class="num">45</span> for Inspector, Army Band</dd>
+        <dt>Service</dt><dd>Minimum <span class="num">10</span> years as a JCO or NCO</dd>
+        <dt>Qualification</dt><dd>Class 11 or 10+2, with additional requirements by category; SHAPE-1 medical category</dd>
+        <dt>Selection</dt><dd>Departmental screening &rarr; SSB, maximum <span class="num">3</span> attempts &rarr; medical</dd>
+        <dt>Training</dt><dd>12 weeks &mdash; an 8-week common skill capsule plus 4 weeks physical training</dd>
+        <dt>Marital status</dt><dd>Married candidates eligible</dd>
+      </dl>
+    </article>
+  </section>
+
+  <!-- ============ TABLE ============ -->
+  <section class="gate">
+    <div class="gate-head">
+      <h2>All sixteen, side by side</h2>
+      <span class="count">Scroll horizontally</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Route</th>
+            <th scope="col">Age</th>
+            <th scope="col">Open to</th>
+            <th scope="col">Written paper</th>
+            <th scope="col">Commission</th>
+            <th scope="col">Trains at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="rt">NDA &amp; NA</td><td class="age">16.5&ndash;19.5</td><td>Men, women</td><td class="yes">UPSC</td><td>Permanent</td><td>NDA, then IMA</td></tr>
+          <tr><td class="rt">10+2 TES</td><td class="age">16.5&ndash;19.5</td><td>Men</td><td class="no">JEE Main</td><td>Permanent</td><td>CME / MCTE / MCEME</td></tr>
+          <tr><td class="rt">MNS B.Sc</td><td class="age">17&ndash;25</td><td>Women</td><td class="yes">NEET + MNS test</td><td>MNS</td><td>AFMS nursing college</td></tr>
+          <tr><td class="rt">AFMC Pune</td><td class="age">Per prospectus</td><td>Men, women</td><td class="yes">NEET-UG</td><td>AFMS, bonded</td><td>AFMC Pune</td></tr>
+          <tr><td class="rt">CDS &rarr; IMA</td><td class="age">19&ndash;24</td><td>Men</td><td class="yes">UPSC</td><td>Permanent</td><td>IMA Dehradun</td></tr>
+          <tr><td class="rt">CDS &rarr; OTA</td><td class="age">19&ndash;25</td><td>Men, women</td><td class="yes">UPSC</td><td>Short Service</td><td>OTA Chennai</td></tr>
+          <tr><td class="rt">NCC Special</td><td class="age">19&ndash;25</td><td>Men, women</td><td class="no">None</td><td>Short Service</td><td>OTA Chennai</td></tr>
+          <tr><td class="rt">Territorial Army</td><td class="age">18&ndash;42</td><td>Men, women</td><td class="yes">CBT</td><td>Part-time</td><td>Unit &amp; annual camps</td></tr>
+          <tr><td class="rt">TGC</td><td class="age">20&ndash;27</td><td>Men</td><td class="no">None</td><td>Permanent</td><td>IMA Dehradun</td></tr>
+          <tr><td class="rt">SSC (Tech)</td><td class="age">20&ndash;27</td><td>Men, women</td><td class="no">None</td><td>Short Service</td><td>OTA Gaya / Chennai</td></tr>
+          <tr><td class="rt">JAG</td><td class="age">21&ndash;27</td><td>Men, women</td><td class="no">CLAT PG</td><td>Short Service</td><td>OTA Chennai</td></tr>
+          <tr><td class="rt">AMC</td><td class="age">Up to 30</td><td>Men, women</td><td class="no">None</td><td>Short Service</td><td>AFMS induction</td></tr>
+          <tr><td class="rt">AD Corps</td><td class="age">Up to 45</td><td>Men, women</td><td class="no">NEET-MDS</td><td>Short Service</td><td>AFMS induction</td></tr>
+          <tr><td class="rt">ACC</td><td class="age">20&ndash;27</td><td>Serving soldiers</td><td class="yes">ACC exam</td><td>Permanent</td><td>ACC Wing, then IMA</td></tr>
+          <tr><td class="rt">SCO</td><td class="age">30&ndash;35</td><td>Serving soldiers</td><td class="yes">Departmental</td><td>Rank-capped</td><td>IMA Dehradun</td></tr>
+          <tr><td class="rt">PC(SL)</td><td class="age">Up to 42</td><td>Serving JCOs / NCOs</td><td class="no">None</td><td>Permanent</td><td>12-week capsule</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ COMMON ============ -->
+  <section class="common">
+    <h2>True of every route</h2>
+    <p>Whatever gate you come through, four things do not change.</p>
+    <div class="common-grid">
+      <div>
+        <h3>Nationality</h3>
+        <p>Indian citizen. Subjects of Nepal, and persons of Indian origin migrated from specified
+          countries, are eligible for the UPSC entries subject to a certificate of eligibility.</p>
+      </div>
+      <div>
+        <h3>The Service Selection Board</h3>
+        <p>Five days, two stages. Day one screens with the Officer Intelligence Rating and Picture
+          Perception &amp; Discussion Test; those who clear it go on to the psychologist, the Group Testing
+          Officer and the interviewing officer, all assessing the same fifteen Officer-Like Qualities.
+          The medical entries are the exception &mdash; they interview instead.</p>
+      </div>
+      <div>
+        <h3>Medical</h3>
+        <p>A Special Medical Board examines every recommended candidate. Appeal and review boards exist and
+          are worth using; a temporary rejection is frequently recoverable.</p>
+      </div>
+      <div>
+        <h3>Marital status</h3>
+        <p>Nearly every direct entry requires you to be unmarried at commissioning, and to stay unmarried
+          through training. The departmental routes and the Territorial Army are the exceptions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NOTES ============ -->
+  <section class="notes">
+    <h2>Four things people still get wrong</h2>
+    <dl>
+      <div class="note">
+        <dt>UES is closed</dt>
+        <dd>The University Entry Scheme, which commissioned pre-final-year engineering students through
+          campus selection, is no longer run. TGC and SSC (Tech) cover the same ground.</dd>
+      </div>
+      <div class="note">
+        <dt>Agnipath is not an officer scheme</dt>
+        <dd>Agnipath changed enrolment into the ranks; it did not touch officer entry. None of the sixteen
+          routes above recruit Agniveers as officers. An Agniveer who is retained and later qualifies
+          competes for ACC, SCO and PC(SL) on the same terms as any other soldier.</dd>
+      </div>
+      <div class="note">
+        <dt>Two portals, not one</dt>
+        <dd>MNS, AMC, the Dental Corps and AFMC run on <strong>join.afms.gov.in</strong>, on the medical
+          services' own calendar. Everything else is notified on <strong>joinindianarmy.nic.in</strong>.
+          Watching only one of the two is how people miss a window.</dd>
+      </div>
+      <div class="note">
+        <dt>A note on corps</dt>
+        <dd>Corps-specific inductions &mdash; the Army Education Corps among them &mdash; appear as notified
+          categories inside the graduate and technical entries above rather than as standing schemes of
+          their own. Read the category list in each live notification.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <div class="colophon">
+    <strong>Sources &amp; currency</strong>
+    Compiled 14 September 2026 from published entry notifications and recruiting material, including the
+    JAG 123rd Course and NCC Special Entry 123rd Course notifications, the TES-56 and SSC (Tech) 2026
+    cycles, Territorial Army 2026, the AFMS medical officer and Army Dental Corps notifications, and
+    departmental entry guidance for ACC, SCO and PC(SL). Age limits are reckoned as on the cut-off date
+    stated in each notification, not as on the date of application. Vacancies, course numbers and
+    shortlisting cut-offs change every cycle &mdash; the notification on
+    <a href="https://joinindianarmy.nic.in">joinindianarmy.nic.in</a> or
+    <a href="https://join.afms.gov.in">join.afms.gov.in</a> governs.
+  </div>
+
+</div>
